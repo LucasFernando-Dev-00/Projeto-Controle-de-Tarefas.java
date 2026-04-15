@@ -1,33 +1,25 @@
 package entities;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Tarefa {
 
-    private Integer id;
     private String titulo;
     private String status;
-    private Date data;
+    private LocalDateTime data;
 
-    Tarefa() {
+    public Tarefa() {
 
     }
 
-    Tarefa(Integer id, String titulo, String status, Date data) {
+    public Tarefa(String titulo, String status, LocalDateTime data) {
 
-        this.id = id;
         this.titulo = titulo;
         this.status = status;
         this.data = data;
         }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getTitulo() {
         return titulo;
@@ -45,11 +37,11 @@ public class Tarefa {
         this.status = status;
     }
 
-    public Date getData() {
+    public LocalDateTime getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDateTime data) {
         this.data = data;
     }
 }
