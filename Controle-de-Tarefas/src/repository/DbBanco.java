@@ -42,17 +42,18 @@ public class DbBanco {
     //private PreparedStatement st = null;
     //private ResultSet rs = null;
 
-public void DBConection() {
+public Connection DBConection() {
 
     try {
         Connection conn = DriverManager.getConnection(url, user, password);
         System.out.println("Conectado com sucesso!");
 
+        return conn;
 
     } catch (SQLException e) {
         e.printStackTrace();
     }
-
+    return null;
 }
 
 
