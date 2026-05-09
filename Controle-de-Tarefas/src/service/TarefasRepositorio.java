@@ -52,7 +52,7 @@ public class TarefasRepositorio {
             ResultSet rs = null;
 
             st = conn.prepareStatement("UPDATE tasks "
-                            + "SET title = ?, SET status = ?, SET created_at = ? "
+                            + "SET title = ?, status = ?, created_at = ? "
                             +"WHERE id = ?");
 
             st.setString(1, tarefa.getTitulo());
@@ -102,8 +102,21 @@ public class TarefasRepositorio {
 
             st.setInt(1, id);
 
-            st.executeQuery();
-            System.out.println("Concluído!");
+            rs = st.executeQuery();
+            if(rs.next()) {
+
+                int taskId = rs.getInt("id");
+                String title = rs.getString("title");
+                String status = rs.getString("status");
+                LocalDate date = rs.getDate("created_at").toLocalDate();
+
+                Tarefa tarefa = new Tarefa(taskId, title, status, date);
+
+                System.out.println(tarefa);
+            }
+            else {
+                System.out.println("Nenhuma tarefa encontrada!\n");
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -121,12 +134,18 @@ public class TarefasRepositorio {
                     "SELECT * FROM tasks");
 
 
-            st.executeQuery();
+            rs = st.executeQuery();
 
             List<Tarefa> list = new ArrayList<>();
 
             while (rs.next()) {
-                Tarefa tarefa = new Tarefa(rs.getInt("id"), rs.getString("title"), rs.getString("status"), (LocalDate) rs.getObject("created_at"));
+                LocalDate data = rs.getDate("created_at").toLocalDate();
+                Tarefa tarefa = new Tarefa(
+                        rs.getInt("id"),
+                        rs.getString("title"),
+                        rs.getString("status"),
+                        data
+                );
 
                 list.add(tarefa);
             }

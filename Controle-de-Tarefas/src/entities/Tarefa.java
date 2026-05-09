@@ -53,4 +53,12 @@ public class Tarefa {
     public void setData(LocalDate data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "ID: " + id +
+                " | Título: " + titulo +
+                " | Status: " + status +
+                " | Data: " + data;
+    }
 }
